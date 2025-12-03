@@ -16,5 +16,4 @@ int confirm_yesno_at(int x, int y, const char* prompt);
 
 void get_today_date(char* buf, size_t n);
 
-// Windows에서 더 안전한 파일 교체
 int replace_file(const char* tmp_path, const char* final_path);

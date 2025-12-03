@@ -118,16 +118,13 @@ void show_transactions_tui(int account_number) {
         else if (c == 'P') {
             if (page > 0) page--;
         }
-        else {
-            // 다른 키는 무시하고 다시 그리기
-        }
     }
 }
 
 int purge_transactions_for_account(int account_number) {
     FILE* in = fopen(TX_FILE, "r");
     if (!in) {
-        return 1; // 파일 없으면 정리할 것도 없음
+        return 1;
     }
     FILE* out = fopen(TX_TMP, "w");
     if (!out) {
@@ -137,7 +134,6 @@ int purge_transactions_for_account(int account_number) {
 
     char line[256];
     while (fgets(line, sizeof(line), in)) {
-        // 라인 복사 후 accno만 파싱해서 비교
         char buf[256];
         strncpy(buf, line, sizeof(buf) - 1);
         buf[sizeof(buf) - 1] = '\0';
@@ -146,7 +142,7 @@ int purge_transactions_for_account(int account_number) {
         if (!accs) continue;
 
         int no = atoi(accs);
-        if (no == account_number) continue; // 해당 계좌는 스킵
+        if (no == account_number) continue;
         fputs(line, out);
     }
 

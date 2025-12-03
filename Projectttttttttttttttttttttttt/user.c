@@ -23,7 +23,7 @@ int load_users(User users[], int* user_count) {
     FILE* fp = fopen(USERS_FILE, "r");
     if (!fp) {
         *user_count = 0;
-        return 0; // 없으면 0명 시작 가능
+        return 0;
     }
 
     char line[256];

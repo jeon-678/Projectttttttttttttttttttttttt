@@ -97,12 +97,9 @@ void get_today_date(char* buf, size_t n) {
 }
 
 int replace_file(const char* tmp_path, const char* final_path) {
-    // MOVEFILE_REPLACE_EXISTING: 기존 파일이 있어도 교체
-    // MOVEFILE_WRITE_THROUGH: 캐시를 거쳐 쓰기 지연 최소화
     if (MoveFileExA(tmp_path, final_path, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH)) {
         return 1;
     }
-    // 혹시 실패하면 fallback
     remove(final_path);
     return rename(tmp_path, final_path) == 0;
 }

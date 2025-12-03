@@ -39,12 +39,10 @@ int load_accounts(Account accounts[], int* account_count) {
 
     FILE* fp = fopen(ACCOUNTS_FILE, "r");
     if (!fp) {
-        // ✅ 파일이 "없으면" 처음 실행이니까 OK(0개)
         if (!file_existsA(ACCOUNTS_FILE)) {
             *account_count = 0;
             return 1;
         }
-        // ✅ 파일이 "있는데" 못 열면 진짜 오류(권한/경로/잠김 등)
         return 0;
     }
 
@@ -163,7 +161,6 @@ int create_account_tui(Account accounts[], int* account_count, const char* user_
     draw_box(1, 1, 80, 18);
     gotoxy(3, 3); printf("계좌 개설");
 
-    // ✅ 중복 방지되는 유니크 번호 발급
     int new_no = generate_unique_account_number(accounts, *account_count);
 
     accounts[*account_count].account_number = new_no;

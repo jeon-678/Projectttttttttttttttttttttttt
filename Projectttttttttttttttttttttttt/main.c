@@ -110,7 +110,7 @@ static void show_user_menu(int user_index) {
             }
             pause_enter_at(3, 22);
         }
-        else if (menu == 4) {  // 출금
+        else if (menu == 4) { 
             if (!load_accounts_or_toast()) continue;
 
             int idx = select_account_index_for_user_tui(
@@ -181,7 +181,7 @@ static void show_user_menu(int user_index) {
             if (idx < 0) continue;
             show_transactions_tui(accounts[idx].account_number);
         }
-        else if (menu == 6) { // 삭제
+        else if (menu == 6) {
             if (!load_accounts_or_toast()) continue;
             int idx = select_account_index_for_user_tui(accounts, account_count, users[user_index].id);
             if (idx < 0) continue;
@@ -210,7 +210,6 @@ static void show_user_menu(int user_index) {
                 continue;
             }
 
-            // (선택) 거래내역도 지우고 싶으면 여기서 물어보기/호출 추가 가능
             toast_at(3, 21, 70, "계좌 삭제 완료!");
             pause_enter_at(3, 22);
         }
@@ -227,7 +226,7 @@ static void show_main_menu(void) {
         clear_screen();
         draw_box(1, 1, 60, 15);
 
-        gotoxy(3, 3);  printf("계좌 관리 시스템 (TUI)");
+        gotoxy(3, 3);  printf("계좌 관리 시스템");
         gotoxy(3, 5);  printf("1. 로그인");
         gotoxy(3, 6);  printf("2. 회원가입");
         gotoxy(3, 7);  printf("3. 종료");
@@ -263,7 +262,7 @@ static void show_main_menu(void) {
 
 int main(void) {
     set_utf8_console();
-    load_users(users, &user_count); // 없으면 0명 시작
+    load_users(users, &user_count);
     show_main_menu();
     return 0;
 }
